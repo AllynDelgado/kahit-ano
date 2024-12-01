@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <style>
+        /* Body and Main Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+        header {
+            background-color: #00bf63; /* Header Color */
+            color: #FFFFFF;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 10px 0 0;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 18px;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        nav ul li a:hover {
+            background-color: #000000;
+            color: #00bf63;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 220px;
+            height: 100vh;
+            background-color: #00bf63; /* Sidebar Green */
+            color: #FFFFFF;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 70px;
+            box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar a {
+            display: block;
+            color: #FFFFFF;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-bottom: 1px solid #FFFFFF;
+        }
+        .sidebar a:hover {
+            background-color: #000000;
+            color: #00bf63;
+        }
+
+        /* Content Styling */
+        .content {
+            margin-left: 240px; /* Space for the sidebar */
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #00bf63;
+            font-size: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, textarea, select, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="file"] {
+            padding: 0;
+        }
+
+        button {
+            background-color: #00bf63;
+            color: #FFFFFF;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #000000;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #d4edda;
+            border-radius: 5px;
+            background-color: #d4edda;
+            color: #155724;
+            display: none;
+        }
+
+        /* Input fields for images */
+        .image-preview {
+            margin-top: 10px;
+            max-width: 150px;
+            display: none;
+        }
+
+        .flex {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .flex-col {
+            flex: 1 1 45%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My Shop</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/dashboard">Seller Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="sidebar">
+        <a href="#inventory">Inventory Management</a>
+        <a href="#product-management">Product Management</a>
+        <a href="#order-management">Order Management</a>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <h2>Add New Product</h2>
+            <form id="product-form" action="{{ url_for('add_product') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateColor()">
+                <label for="productName">Product Name</label>
+                <input type="text" id="product_name" name="product_name" placeholder="Enter product name" required>
+
+                <label for="productPrice">Price ($)</label>
+                <input type="number" id="product_price" name="product_price" step="0.01" placeholder="Enter product price" required>
+
+                <label for="productCategory">Category</label>
+                <select id="product_category" name="product_category" required>
+                    <option value="">Select category</option>
+                    <option value="Electronics">Laptop</option>
+                    <option value="Clothing">Camera</option>
+                    <option value="Home">Cellphone</option>  
+                </select>
+
+                <label for="productStock">Stock Quantity</label>
+                <input type="number" id="product_stock" name="product_stock" placeholder="Enter stock quantity" required>
+
+                <label for="productColor">Product Color</label>
+                <input type="text" id="product_color" name="product_color" placeholder="Enter product color" required>
+
+                <label for="productDiscount">Discount Value</label>
+                <input type="text" id="product_discount" name="product_discount" placeholder="Enter discount value" required>
+
+                <div class="flex">
+                    <div class="flex-col">
+                        <label for="product-image">Product Image</label>
+                        <input type="file" name="product_image" id="product_image" class="p-2 border rounded" required onchange="previewImage(event, 'image-preview')">
+                        <img id="image-preview" class="image-preview" alt="Image Preview">
+                    </div>
+                    <div class="flex-col">
+                        <label for="additional-images">Additional Images (up to 5)</label>
+                        <input type="file" name="additional_images" id="additional_images" class="p-2 border rounded" onchange="previewImage(event, 'additional-preview')">
+                        <img id="additional-preview" class="image-preview" alt="Additional Image Preview">
+                    </div>
+                </div>
+
+                <script>
+                    function previewImage(event, previewId) {
+                        const imagePreview = document.getElementById(previewId);
+                        const file = event.target.files[0];
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            imagePreview.src = e.target.result;
+                            imagePreview.style.display = 'block';
+                        }
+
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        } else {
+                            imagePreview.style.display = 'none';
+                        }
+                    }
+                </script>
+
+                <label for="productDescription">Description</label>
+                <textarea id="product_description" name="product_description" rows="4" placeholder="Enter product description"></textarea>
+
+                <div class="flex items mb-5">
+                    <input type="checkbox" name="flash_sale" id="flash_sale" class="mr-2">
+                    <label for="flash-sale" class="font-medium">Add to Flash Sales</label>
+                </div>
+
+                <button type="submit">Add Product</button>
+            </form>
+
+            <div class="message" id="successMessage">
+                Product added successfully!
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

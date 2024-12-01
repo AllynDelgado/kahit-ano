@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - My Shop</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and Main Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        /* Header and Navigation Bar */
+        header {
+            background-color: #00bf63;
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background-color: #FFFFFF;
+            color: #00bf63;
+        }
+
+        .seller-button a {
+            background-color: #FFFFFF;
+            color: #00bf63;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .seller-button a:hover {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background-color: #f8f8f8;
+        }
+
+        .search-bar input {
+            width: 60%;
+            padding: 10px;
+            border: 2px solid #00bf63;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #00bf63;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #028f49;
+        }
+
+        /* Banner Section */
+        .banner {
+            background: linear-gradient(180deg, rgba(0, 191, 99, 0.8), rgba(0, 0, 0, 0.7)), 
+                        url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        .banner h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px #000000;
+        }
+
+        .banner p {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px #000000;
+        }
+
+        .button {
+            padding: 12px 25px;
+            background-color: #FFFFFF;
+            color: #00bf63;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        /* Flash Sale and Categories Section */
+        .flash-sale-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Categories Section (Left side of Flash Sale) */
+        .categories-container {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            margin-right: 100px;
+            margin-top: 30px;
+            gap: 35px;
+        }
+
+        .categories-header {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #00bf63;
+        }
+
+        .category-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .category-item img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .category-item h3 {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        /* Flash Sale Section (Right side of Categories) */
+        .flash-sale {
+            width: 70%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+
+        .flash-sale-item {
+            width: calc(33.333% - 20px);
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .flash-sale-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .flash-sale-item img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .flash-sale-item h4 {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .flash-sale-item p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .flash-sale-item .price {
+            font-weight: bold;
+            color: #00bf63;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .flash-sale-item .buy-btn {
+            background-color: #00bf63;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .flash-sale-item .buy-btn:hover {
+            background-color: #028f49;
+        }
+
+        /* Daily Discover Section */
+.daily-discover {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px 20px;
+    background-color: #f8f8f8;
+}
+
+.daily-discover-item {
+    width: calc(25% - 20px);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.daily-discover-item img {
+    width: 300px; /* Set width to 300px */
+    height: 300px; /* Set height to 300px */
+    object-fit: cover; /* Ensure the image covers the 300x300 box proportionally */
+    border-radius: 8px;
+}
+
+.daily-discover-item h4 {
+    margin-top: 10px;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.daily-discover-item p {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.daily-discover-item .price {
+    font-weight: bold;
+    color: #00bf63;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+        /* Footer Section */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #00bf63;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer .social-icons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer .social-icons img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        footer .social-icons img:hover {
+            transform: scale(1.2);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo"><a href="#">Tech thrifts</a></div>
+            <div class="nav-links">
+                <a href="homepage.html">Home</a>
+                <a href="product.html">Products</a>
+                <a href="#">Cart</a>
+                <a href="profile_dashboard.html">Profile</a>
+            </div>
+            <div class="seller-button">
+                <a href="{% if session.get('role') == 'seller' %}{{ url_for('sellerhomepage') }}{% else %}{{ url_for('login') }}{% endif %}">
+                    Become a Seller
+        </nav>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" placeholder="Search for products">
+        <button>Search</button>
+    </div>
+
+   <!-- Banner Section -->
+   <section class="banner">
+    <div>
+        <h1>Welcome to Tech Thrifts!</h1>
+        <p>Discover amazing products at unbeatable prices.</p>
+        {% if not session.get('logged_in') %}
+        <a href="/login"><button class="button">Login</button></a>
+        {% endif %}
+    </div>
+</section>
+
+    <!-- Flash Sale and Categories -->
+    <section class="flash-sale-container">
+        <!-- Categories Section -->
+        <div class="categories-container">
+            <div class="categories-header">Product Categories</div>
+            <div class="category-item">
+                <img src="/static/images/laptop.png" alt="Laptop">
+                <h3>Laptops</h3>
+            </div>  
+            <div class="category-item">
+                <img src="/static/images/mobile-regular-24.png" alt="Phone">
+                <h3>Phones</h3>
+            </div>
+            <div class="category-item">
+                <img src="/static/images/camera-regular-24.png" alt="Camera">
+                <h3>Cameras</h3>
+            </div>
+        </div>
+
+        <!-- Flash Sale Section -->
+        <div class="flash-sale">
+            <div class="flash-sale-item">
+                <img src="/static/images/gaming laptop.jpg" alt="Gaming Laptop">
+                <h4>Gaming Laptop</h4>
+                <p>Best performance for gaming</p>
+                <div class="price">$999.99</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="flash-sale-item">
+                <img src="/static/images/smartphone.jpg" alt="Smartphone">
+                <h4>Smartphone</h4>
+                <p>Latest model with great features</p>
+                <div class="price">$599.99</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="flash-sale-item">
+                <img src="/static/images/camera.jpg" alt="Camera">
+                <h4>Camera</h4>
+                <p>Capture memories in high definition</p>
+                <div class="price">$499.99</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Discover Products -->
+    <section class="daily-discover">
+        <div class="daily-discover-item">
+            <img src="/static/images/phone4.jpg" alt="Product">
+            <h4>Gaming Phone</h4>
+            <div class="price">$199.99</div>
+        </div>
+        <div class="daily-discover-item">
+            <img src="/static/images/laptop3.jpg" alt="Product">
+            <h4>Gaming Laptop</h4>
+            <div class="price">$149.99</div>
+        </div>
+        <div class="daily-discover-item">
+            <img src="/static/images/cam2.jpg" alt="Product">
+            <h4>Camera</h4>
+            <div class="price">$79.99</div>
+        </div>
+        <div class="daily-discover-item">
+            <img src="/static/images/phone3.jpg" alt="Product">
+            <h4>Gaming Phone</h4>
+            <div class="price">$49.99</div>
+        </div>
+    </section>
+
+    <script>
+         // Search Functionality
+         function searchProduct() {
+            const searchTerm = document.getElementById("search-bar").value;
+            window.location.href = `/search?q=${searchTerm}`;
+        }
+
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 My Shop. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="#"><img src="/static/images/facebook-circle-logo-24.png" alt="Facebook"></a>
+            <a href="#"><img src="/static/images/instagram-alt-logo-24.png" alt="Instagram"></a>
+            <a href="#"><img src="/static/images/twitter-logo-24 (1).png" alt="Twitter"></a>
+        </div>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+</body>
+</html>

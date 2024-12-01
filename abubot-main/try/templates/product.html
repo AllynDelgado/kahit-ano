@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and Main Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        /* Header and Navigation Bar */
+        header {
+            background-color: #00bf63; /* Green Header */
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background-color: #000000;
+            color: #00bf63;
+        }
+
+        /* Seller Button */
+        .seller-button a {
+            background-color: #FFFFFF;
+            color: #00bf63;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .seller-button a:hover {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            height: 100vh;
+            background-color: #00bf63; /* Green Sidebar */
+            color: #FFFFFF;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 70px;
+            box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar a {
+            display: block;
+            color: #FFFFFF;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-bottom: 1px solid #FFFFFF;
+        }
+
+        .sidebar a:hover {
+            background-color: #000000;
+            color: #00bf63;
+        }
+
+        /* Content */
+        .content {
+            margin-left: 240px; /* Space for the sidebar */
+            padding: 20px;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            color: #00bf63;
+        }
+
+        .content p {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000000;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header and Navigation -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">My Shop</a>
+            </div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/products">Products</a>
+                <a href="/cart">Cart</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <div class="seller-button">
+                <a href="/dashboard">Seller Dashboard</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#inventory">Laptop</a>
+        <a href="#product-management">Camera</a>
+        <a href="#order-management">Cellphone</a>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h2>Products</h2>
+        <p>Use the sidebar to manage your products and orders.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 My Shop. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - My Shop</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and Main Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        /* Header and Navigation Bar */
+        header {
+            background-color: #00bf63;
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Logo Styling */
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background-color: #FFFFFF;
+            color: #00bf63;
+        }
+
+        /* Seller Button */
+        .seller-button a {
+            background-color: #FFFFFF;
+            color: #00bf63;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .seller-button a:hover {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        /* Banner Section */
+        .banner {
+            background: linear-gradient(180deg, rgba(0, 191, 99, 0.8), rgba(0, 0, 0, 0.7)), 
+                        url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        .banner h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px #000000;
+        }
+
+        .banner p {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px #000000;
+        }
+
+        .button {
+            padding: 12px 25px;
+            background-color: #FFFFFF;
+            color: #00bf63;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        /* Featured Products Section */
+        .products {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+
+        .products h2 {
+            font-size: 2.5rem;
+            color: #00bf63;
+            margin-bottom: 30px;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .product-item {
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-item img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .product-item p {
+            color: #666666;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .product-item button {
+            padding: 10px 20px;
+            background-color: #00bf63;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-item button:hover {
+            background-color: #000000;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000000;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header and Navigation -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">Tech-thrifts</a>
+            </div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/products">Products</a>
+                <a href="/cart">Cart</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <div class="seller-button">
+                <a href="{% if session.get('role') == 'seller' %}{{ url_for('sellerhomepage') }}{% else %}{{ url_for('login') }}{% endif %}">
+                    Become a Seller
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <div>
+            <h1>Welcome to My Shop!</h1>
+            <p>Discover amazing products at unbeatable prices.</p>
+            {% if not session.get('logged_in') %}
+            <a href="/login"><button class="button">Login</button></a>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="products">
+        <h2>Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="https://via.placeholder.com/200" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>$10.00</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product-item">
+                <img src="https://via.placeholder.com/200" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>$15.00</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product-item">
+                <img src="https://via.placeholder.com/200" alt="Product 3">
+                <h3>Product 3</h3>
+                <p>$20.00</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product-item">
+                <img src="https://via.placeholder.com/200" alt="Product 4">
+                <h3>Product 4</h3>
+                <p>$25.00</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 My Shop. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
